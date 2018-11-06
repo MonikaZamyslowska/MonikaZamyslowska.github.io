@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  const apiRoot = 'http://localhost:8080/v1/';
+  const apiRoot = 'https://evening-fortress-58145.herokuapp.com/v1/task';
   const trelloApiRoot = 'http://localhost:8080/v1/trello/';
   const datatableRowTemplate = $('[data-datatable-row-template]').children()[0];
   const $tasksContainer = $('[data-tasks-container]');
@@ -12,7 +12,7 @@ $(document).ready(function() {
   getAllTasks();
 
   function getAllAvailableBoards(callback, callbackArgs) {
-    var requestUrl = trelloApiRoot + 'getTrelloBoards';
+    var requestUrl = trelloApiRoot + 'getTasks';
 
     $.ajax({
       url: requestUrl,
@@ -63,7 +63,7 @@ $(document).ready(function() {
   }
 
   function getAllTasks() {
-    const requestUrl = apiRoot + 'tasks';
+    const requestUrl = apiRoot + 'getTasks';
 
     $.ajax({
       url: requestUrl,
@@ -84,7 +84,7 @@ $(document).ready(function() {
     var taskId = parentEl.attr('data-task-id');
     var taskTitle = parentEl.find('[data-task-name-input]').val();
     var taskContent = parentEl.find('[data-task-content-input]').val();
-    var requestUrl = apiRoot + 'task';
+    var requestUrl = apiRoot + 'updateTask';
 
     $.ajax({
       url: requestUrl,
@@ -108,7 +108,7 @@ $(document).ready(function() {
   function handleTaskDeleteRequest() {
     var parentEl = $(this).parents('[data-task-id]');
     var taskId = parentEl.attr('data-task-id');
-    var requestUrl = apiRoot + 'task';
+    var requestUrl = apiRoot + 'deleteTask';
 
     $.ajax({
       url: requestUrl + '/?' + $.param({
@@ -127,7 +127,7 @@ $(document).ready(function() {
     var taskTitle = $(this).find('[name="title"]').val();
     var taskContent = $(this).find('[name="content"]').val();
 
-    var requestUrl = apiRoot + 'task';
+    var requestUrl = apiRoot + 'createTask';
 
     $.ajax({
       url: requestUrl,
